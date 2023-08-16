@@ -1,0 +1,58 @@
+//package insertQuery;
+//
+//import in.jdbcUtil.JDBCUtil;
+//
+//import java.io.IOException;
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.util.Scanner;
+//
+//public class selectMYSQL {
+//    public static void main(String[] args) {
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//        ResultSet resultSet = null;
+//        Scanner sc = new Scanner(System.in);
+//        try {
+//            connection = JDBCUtil.getJdbcConnection();
+//
+//            String selectQuery = "Select * from student where id = ?";
+//            preparedStatement = connection.prepareStatement(selectQuery);
+//
+//
+//             if(preparedStatement!=null){
+//                 System.out.println("select query to get the data from the database");
+//                 int id = sc.nextInt();
+//                 preparedStatement.setInt(1,id);
+//
+//                 resultSet = preparedStatement.executeQuery();
+//
+//                 if (resultSet!=null){
+//                     if(resultSet.next()){
+//                         System.out.println("Id\tName\troll\tResult");
+//                         System.out.println(resultSet.getInt(1)+"\t"+resultSet.getString(2)+"\t"+resultSet.getInt(3)+"\t"+resultSet.getString(4));
+//
+//                     }
+//                 }
+//             }
+//
+//
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        finally {
+//            try {
+//                   JDBCUtil.closeResource(connection,preparedStatement,resultSet);
+//                   sc.close();
+//            }
+//            catch (Exception e){
+//                  e.printStackTrace();
+//            }
+//        }
+//    }
+//}
