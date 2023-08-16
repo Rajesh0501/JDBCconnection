@@ -1,0 +1,9 @@
+# JDBCconnection
+# Steps given by SUNMS to interact with Databases
+1. Load and register the driver .
+2. Estabilish the connection .
+3. Create Statement/PreparedStatement/CallcbleStatement to transfer the query
+4. Execute the query .
+5. Process the result . 
+6. Close the resourses .
+7. Handle SQLException if it occurs.
