@@ -1,0 +1,54 @@
+package CRUDoperation;
+
+import in.jdbcUtil.JDBCUtil;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class deleteQuery {
+    public static void main(String[] args) {
+        Connection connection = null;
+        PreparedStatement preparedStatement  = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            connection = JDBCUtil.getJdbcConnection();
+            String upDateQuery = "delete from student where id = ?";
+            preparedStatement = connection.prepareStatement(upDateQuery);
+
+            if (preparedStatement!=null){
+                System.out.println("enter the id which do you want to update");
+                int id = sc.nextInt();
+                preparedStatement.setInt(1,id);
+
+                int rowEffect = preparedStatement.executeUpdate();
+
+                if(rowEffect==1){
+                    System.out.println("row deleted successfully");
+                }
+                else {
+                    System.out.println("got something wrong");
+                }
+            }
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                JDBCUtil.closeResource(connection,preparedStatement);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+}
