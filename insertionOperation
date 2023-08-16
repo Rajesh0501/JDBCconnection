@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+
+public class insertionMYSQL_prepareStatment {
+    public static void main(String[] args) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = JDBCUtil.getJdbcConnection();
+            if (connection != null) {
+                Scanner sc = new Scanner(System.in);
+
+
+                String insertQuery = "insert into student(name,roll,result) values(?,?,?)";
+                preparedStatement = connection.prepareStatement(insertQuery);
+                if (preparedStatement!=null) {
+                    System.out.println("enter your name");
+                    String name = sc.nextLine();
+                    System.out.println("enter your roll number");
+                    int roll = sc.nextInt();
+                    System.out.println("enter your result");
+                    String result = sc.nextLine();
+
+                    preparedStatement.setString(3, name);
+                    preparedStatement.setInt(2, roll);
+                    preparedStatement.setString(1, result);
+
+                    int rowEffector = preparedStatement.executeUpdate();
+                    if (rowEffector == 1) {
+                        System.out.println("row inserted");
+                    } else {
+                        System.out.println("row not inserted");
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                JDBCUtil.closeResource(connection,preparedStatement);
+            }
+            catch (SQLException e){
+                 e.printStackTrace();
+            }
+        }
+
+
+    }
+}
